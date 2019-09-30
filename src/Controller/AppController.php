@@ -57,7 +57,6 @@ class AppController extends Controller
         parent::initialize();
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        /*
         $this->loadComponent('Auth', [
             'loginAction'=>[
                  'controller' => 'Users',
@@ -68,7 +67,6 @@ class AppController extends Controller
                 'action' => 'index'
             ]
         ]); 
-        */
     }
 
     public function beforeFilter(Event $event)
