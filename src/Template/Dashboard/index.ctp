@@ -1,7 +1,7 @@
 <div class="features-boxed">
         <div class="container">
             <div class="intro text-center">
-                <h2>Active Challenge</h2>
+                <h2><?= $active_passage->title ?></h2>
                 <?php if ($active_passage): ?>
                     <?= strlen($active_passage->paragraph) > 250 ?  substr($active_passage->paragraph, 0, 250)." ....." : $active_passage->paragraph?></p>
                     <a href="<?= $this->url->build(['controller' => 'Challenges', 'action'=>'view', $active_passage->id])?>" class="badge badge-outline-primary">View Scores</a>
