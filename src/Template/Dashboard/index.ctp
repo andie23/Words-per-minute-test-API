@@ -9,8 +9,6 @@
                     No active challenges found!!
                 <?php endif; ?>
                 <p/>
-                <a href="<?= $this->url->build(['controller' => 'Challenges', 'action'=>'random'])?>" class="badge badge-outline-primary">Set Random Challenge</a>
-                <a href="<?= $this->url->build(['controller' => 'Challenges', 'action' => 'index'])?>" class="badge badge-outline-primary">All Challenges</a>
             </div>
             <div class="row justify-content-center features">
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
