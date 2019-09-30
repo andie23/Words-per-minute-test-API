@@ -20,6 +20,8 @@ class DashboardController extends AppController
      */
     public function index()
     {
-       
+       $this->loadModel('Challenges');
+
+       $this->set('active_passage', $this->Challenges->getActiveChallenge());
     }
 }
