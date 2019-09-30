@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Carbon\Carbon;
+use Cake\Log\Log;
 
 /**
  * Api Controller
@@ -17,6 +18,7 @@ class ApiController extends AppController
         $this->RequestHandler->respondAs('json');
         $this->response->type('application/json');
         $this->autoRender = false;
+        $this->Auth->allow(['authenticate', 'challenge', 'submission']);
     }
 
     public function authenticate(){
@@ -28,7 +30,6 @@ class ApiController extends AppController
             if ($this->Participants->verify($data['code'])){
                 $response = $this->Participants->getAllFromRefCode($data['code']);
             }else{
-                $this->response->statusCode('404');
                 $response = ['error'=>'Reference code does not exist'];
             }
         }
@@ -47,14 +48,11 @@ class ApiController extends AppController
                 "passage" => $activeChallenge->paragraph
             ];
         }else{
-            $this->response->statusCode('404');
             $response = ['error' => 'No challenge available at the momment!'];
-        
         }
         echo json_encode($response);
     }
 
-    
     public function submission(){
         $response = [];
         $this->loadModel('Perfomances');
@@ -63,21 +61,9 @@ class ApiController extends AppController
                 $this->response->statusCode('201');
                 $response = ['success' => 'Results saved!'];
             }else{
-                $this->response->statusCode('304');
                 $response = ['error' => 'Result submission error'];
             }
         }
         echo json_encode($response);
-    }
-    
-    public function scores(){
-
-    }
-    
-
-    public function search()
-    {
-        $this->loadModel('Areas');
-        echo json_encode($this->Areas->getAreaIndex());
     }
 }
