@@ -6,6 +6,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use App\Lib\ArrayEntityBuilder;
 
 /**
  * Challenges Model
@@ -77,7 +78,36 @@ class ChallengesTable extends Table
     public function getActiveChallenge()
     {
         return $this->find()
-                      ->where(['is_active' => 1])
-                      ->first();
+                    ->where(['is_active' => 1])
+                    ->first();
+    }
+
+    public function setStatus($challenge, $state){
+        $entity = $this->patchEntity($challenge, ['is_active' => $state]);
+        return $this->save($entity);
+    }
+
+    public function setActive($id){
+       $activeChallenge = $this->getActiveChallenge();
+       if ($activeChallenge){
+            $this->setStatus($activeChallenge, 0);
+       }
+       return $this->setStatus($this->get($id), 1);
+    }
+
+    public function setRandomPassageAsActive(){
+        $builder = new ArrayEntityBuilder();
+        $challenges = $builder->buildNumericIndexedAssocArray($this->find()->all());
+        $count = count($challenges);
+        
+        if ($count <= 1) {
+            return True;
+        }
+
+        if ($challenges){
+            $choosenChallenge = $challenges[rand(0, $count-1)];
+            return $this->setActive($choosenChallenge->id, 1);
+        }
+        return False;
     }
 }
