@@ -102,4 +102,13 @@ class ChallengesController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+    public function random(){
+        if ($this->Challenges->setRandomPassageAsActive()){
+            $this->Flash->success('Random challenge has been set');
+        }else{
+            $this->Flash->error('Failed to set random challenge');
+        }
+        return $this->redirect(['controller'=>'Dashboard', 'action' => 'index']);
+    }
 }
