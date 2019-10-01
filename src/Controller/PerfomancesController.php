@@ -48,12 +48,12 @@ class PerfomancesController extends AppController
      */
     public function add()
     {
+        return $this->redirect(['action' => 'index']);
         $perfomance = $this->Perfomances->newEntity();
         if ($this->request->is('post')) {
             $perfomance = $this->Perfomances->patchEntity($perfomance, $this->request->data);
             if ($this->Perfomances->save($perfomance)) {
                 $this->Flash->success(__('The perfomance has been saved.'));
-                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The perfomance could not be saved. Please, try again.'));
             }
@@ -73,6 +73,7 @@ class PerfomancesController extends AppController
      */
     public function edit($id = null)
     {
+        return $this->redirect(['action' => 'index']);
         $perfomance = $this->Perfomances->get($id, [
             'contain' => []
         ]);
@@ -80,7 +81,6 @@ class PerfomancesController extends AppController
             $perfomance = $this->Perfomances->patchEntity($perfomance, $this->request->data);
             if ($this->Perfomances->save($perfomance)) {
                 $this->Flash->success(__('The perfomance has been saved.'));
-                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The perfomance could not be saved. Please, try again.'));
             }
@@ -100,6 +100,7 @@ class PerfomancesController extends AppController
      */
     public function delete($id = null)
     {
+        return $this->redirect(['action' => 'index']);
         $this->request->allowMethod(['post', 'delete']);
         $perfomance = $this->Perfomances->get($id);
         if ($this->Perfomances->delete($perfomance)) {
@@ -107,6 +108,5 @@ class PerfomancesController extends AppController
         } else {
             $this->Flash->error(__('The perfomance could not be deleted. Please, try again.'));
         }
-        return $this->redirect(['action' => 'index']);
     }
 }
