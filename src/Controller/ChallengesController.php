@@ -33,8 +33,9 @@ class ChallengesController extends AppController
     {
         $this->loadModel('Perfomances');
         $challenge = $this->Challenges->get($id);
-        
-        $this->set('perfomances', $this->Perfomances->getAvgChallengePerfomancesById($id));
+        $scores = $this->Perfomances->getAvgChallengePerfomancesById($id);
+
+        $this->set('perfomances', $scores);
         $this->set('challenge', $challenge);
         $this->set('_serialize', ['challenge']);
     }
