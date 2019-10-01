@@ -84,7 +84,10 @@ class ChallengesTable extends Table
 
     public function setStatus($challenge, $state){
         $entity = $this->patchEntity($challenge, ['is_active' => $state]);
-        return $this->save($entity);
+        if ($this->save($entity)){
+            return $challenge;
+        }
+        return [];
     }
 
     public function setActive($id){

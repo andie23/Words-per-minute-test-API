@@ -2,10 +2,8 @@
 <div class="row">
 <div class="col-md-2">
 <div class="list-group">
-  <?= $this->Html->link(__('New Challenge'), ['action' => 'add'], ['class' => 'list-group-item list-group-item-action']) ?>
-                <?= $this->Html->link(__('List Perfomances'), ['controller' => 'Perfomances', 'action' => 'index'], ['class' => 'list-group-item list-group-item-action']) ?>
-            <?= $this->Html->link(__('New Perfomance'), ['controller' => 'Perfomances', 'action' => 'add'] , ['class' => 'list-group-item list-group-item-action']) ?>
-    </div>
+    <?= $this->Html->link(__('New Challenge'), ['action' => 'add'], ['class' => 'list-group-item list-group-item-action']) ?>
+</div>
 </div>
 <div class="col-md-10">
     <div class="card" width=100?>
@@ -24,18 +22,31 @@
         </thead>
         <tbody>
             <?php foreach ($challenges as $challenge): ?>
-            <tr>
-                <td><?= $this->Number->format($challenge->id) ?></td>
-                <td><?= h($challenge->title) ?></td>
-                <td><?= $this->Number->format($challenge->time_limit) ?> Minute(s)</td>
-                <td><?= h($challenge->is_active) ?></td>
-                <td><?= h($challenge->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('Details'), ['action' => 'view', $challenge->id]) ?>
-                    <?= $this->Html->link(__('Modify'), ['action' => 'edit', $challenge->id]) ?>
-                    <?= $this->Form->postLink(__('Remove'), ['action' => 'delete', $challenge->id], ['confirm' => __('Are you sure you want to delete # {0}?', $challenge->id)]) ?>
-                </td>
-            </tr>
+                <?php if($challenge->is_active): ?>
+                    <tr class="bg-primary text-white">
+                    <td><?= $this->Number->format($challenge->id) ?></td>
+                    <td><?= h($challenge->title) ?></td>
+                    <td><?= $this->Number->format($challenge->time_limit) ?> Minute(s)</td>
+                    <td><?= $challenge->is_active == 1 ? 'Yes' : 'No' ?></td>
+                    <td><?= h($challenge->created) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('Details'), ['action' => 'view', $challenge->id], ['class'=> 'badge badge-light']) ?>
+                    </td>
+                <?php else: ?>
+                    <tr>
+                    <td><?= $this->Number->format($challenge->id) ?></td>
+                    <td><?= h($challenge->title) ?></td>
+                    <td><?= $this->Number->format($challenge->time_limit) ?> Minute(s)</td>
+                    <td><?= $challenge->is_active == 1 ? 'Yes' : 'No' ?></td>
+                    <td><?= h($challenge->created) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('Activate'), ['action' => 'activate', $challenge->id], ['class'=> 'badge badge-light'])?>
+                        <?= $this->Html->link(__('Details'), ['action' => 'view', $challenge->id], ['class'=> 'badge badge-light']) ?>
+                        <?= $this->Html->link(__('Modify'), ['action' => 'edit', $challenge->id],  ['class'=> 'badge badge-light']) ?>
+                        <?= $this->Form->postLink(__('Remove'), ['action' => 'delete', $challenge->id], ['class'=> 'badge badge-light', 'confirm' => __('Are you sure you want to delete # {0}?', $challenge->id)]) ?>
+                    </td>
+                    </tr>
+                <?php endif; ?>
             <?php endforeach; ?>
         </tbody>
     </table>

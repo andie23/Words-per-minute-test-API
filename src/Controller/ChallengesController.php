@@ -104,6 +104,16 @@ class ChallengesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    public function activate($id){
+        $entity = $this->Challenges->setActive($id);
+        if ($entity){
+            $this->Flash->success(__('{0} is now the active challenge', $entity->title));
+        }else{
+           $this->Flash->error('Failed to make challenge active');
+        }
+        return $this->redirect(['action' => 'index']);
+    }
+
     public function random(){
         if ($this->Challenges->setRandomPassageAsActive()){
             $this->Flash->success('Random challenge has been set');
