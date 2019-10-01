@@ -57,11 +57,12 @@ class ApiController extends AppController
         $response = [];
         $this->loadModel('Perfomances');
         if ($this->request->is('post')){
-            if($this->Perfomances->log($this->request->data)){
+            $entity = $this->Perfomances->log($this->request->data);
+            if ($entity){
                 $this->response->statusCode('201');
-                $response = ['success' => 'Results saved!'];
+                $response = ['score' =>  $entity->score];
             }else{
-                $response = ['error' => 'Result submission error'];
+                $response = ['error' => 'An error has occured while saving score data'];
             }
         }
         echo json_encode($response);
