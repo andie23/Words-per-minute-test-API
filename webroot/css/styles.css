@@ -12,6 +12,12 @@
 .time select,
 .datetime select {
     display: inline;
-    width: auto;
     margin-right: 10px;
+}
+.scrollable{
+	overflow: hidden;
+	height: 8rem;
+ }
+.scrollable:hover{
+	overflow-y: scroll;
 }
