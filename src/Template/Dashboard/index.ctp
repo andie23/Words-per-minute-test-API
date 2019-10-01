@@ -15,7 +15,7 @@
                     <div class="box"><i class="fa fa-map-marker icon"></i>
                         <h3 class="name">Leadership Board</h3>
                         <p class="description">View whose leading the competition</p>
-                        <a href="<?= $this->url->build([])?>" class="badge badge-outline-primary">View </a>
+                        <a href="<?= $this->url->build(['controller' => 'Scores', 'action' => 'index'])?>" class="badge badge-outline-primary">View </a>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">

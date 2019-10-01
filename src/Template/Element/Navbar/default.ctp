@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="<?= $this->Url->build([])?>">Leadership Board</a>
+                <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Scores', 'action' => 'index'])?>">Leadership Board</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= $this->Url->build(['controller'=>'challenges', 'action'=>'index'])?>">Challenges</a>
