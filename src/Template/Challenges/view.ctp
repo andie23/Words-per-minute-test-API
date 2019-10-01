@@ -22,9 +22,9 @@
      <div class="related">
         <h4><?= __('ScoreBoard') ?></h4>
         <?php if (!empty($perfomances)): ?>
-        <table class="table">
+        <table class="table text-center">
             <tr>
-                <th><?= __('Score') ?></th>
+                <th><?= __('Points') ?></th>
                 <th><?= __('Participant') ?></th>
                 <th><?= __('Words Per Minute') ?></th>
                 <th><?= __('Accuracy') ?></th>
@@ -34,13 +34,13 @@
             </tr>
             <?php foreach ($perfomances as $perfomance): ?>
             <tr>
-                <td><?= h($perfomance->score) ?></td>
+                <td><?= h((int) $perfomance->score) ?></td>
                 <td><?= h($perfomance->participant) ?></td>
-                <td><?= h($perfomance->wpm) ?></td>
-                <td><?= h($perfomance->accuracy) ?></td>
-                <td><?= h($perfomance->errors) ?></td>
+                <td><?= h((int) $perfomance->wpm) ?></td>
+                <td><?= h((int) $perfomance->accuracy) ?></td>
+                <td><?= h((int) $perfomance->errors) ?></td>
                 <td><?= h($perfomance->minutes) ?></td>
-                <td><?= $perfomance->is_time_out == 0 ? '<b class="badge badge-danger"> Yes </b>' : '<b class="badge badge-success">No</b>' ?></td>
+                <td><?= $perfomance->timeout == 1 ? '<b class="badge badge-danger"> Yes </b>' : '<b class="badge badge-success">No</b>' ?></td>
             </tr>
             <?php endforeach; ?>
         </table>
