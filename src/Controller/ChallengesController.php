@@ -50,6 +50,9 @@ class ChallengesController extends AppController
         if ($this->request->is('post')) {
             $challenge = $this->Challenges->patchEntity($challenge, $this->request->data);
             if ($this->Challenges->save($challenge)) {
+                if($challenge->is_active == 1){
+                    $this->Challenges->setActive($challenge->id);
+                }
                 $this->Flash->success(__('The challenge has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
@@ -75,6 +78,9 @@ class ChallengesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $challenge = $this->Challenges->patchEntity($challenge, $this->request->data);
             if ($this->Challenges->save($challenge)) {
+                if($challenge->is_active == 1){
+                    $this->Challenges->setActive($challenge->id);
+                }
                 $this->Flash->success(__('The challenge has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
