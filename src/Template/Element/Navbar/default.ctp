@@ -15,9 +15,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?= $this->Url->build(['controller'=>'participants', 'action'=>'index'])?>">Participants</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= $this->Url->build(['controller'=>'perfomances', 'action'=>'index'])?>">Perfomances</a>
-            </li>
             </ul>
             <b><?= $this->fetch('title') ?></b>
         </div>
