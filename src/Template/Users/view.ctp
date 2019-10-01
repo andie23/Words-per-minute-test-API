@@ -56,13 +56,6 @@
     </p>
   </div>
 </div>
-    
-    <div class="card" style="width: 58rem;">
-    <div class="card-body">
-        <h5 class="card-title"><?= __('Password') ?></h5>
-        <p class="card-text"><?= $this->Text->autoParagraph(h($user->password)); ?></p>
-    </div>
-    </div>
 </div>
 </div>
 </div>
