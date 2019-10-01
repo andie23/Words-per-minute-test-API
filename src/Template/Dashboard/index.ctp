@@ -22,16 +22,16 @@
                     <div class="box"><i class="fa fa-clock-o icon"></i>
                         <h3 class="name">Challenges</h3>
                         <p class="description">View all challenges</p>
-                        <a href="<?= $this->url->build([])?>" class="badge badge-outline-primary">View all</a>
-                        <a href="<?= $this->url->build([])?>" class="badge badge-outline-primary">Add new</a>
+                        <a href="<?= $this->url->build(['controller' => 'Challenges', 'action' => 'index'])?>" class="badge badge-outline-primary">View all</a>
+                        <a href="<?= $this->url->build(['controller' => 'Challenges', 'action' => 'add'])?>" class="badge badge-outline-primary">Add new</a>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
                     <div class="box"><i class="fa fa-list-alt icon"></i>
                         <h3 class="name">Participants</h3>
                         <p class="description">View registered participants</p>
-                        <a href="<?= $this->url->build([])?>" class="badge badge-outline-primary">Add New</a>
-                        <a href="<?= $this->url->build([])?>" class="badge badge-outline-primary">View All</a>
+                        <a href="<?= $this->url->build(['controller' => 'Participants', 'action' => 'add'])?>" class="badge badge-outline-primary">Add New</a>
+                        <a href="<?= $this->url->build(['controller' => 'Participants', 'action' => 'index'])?>" class="badge badge-outline-primary">View All</a>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
@@ -39,7 +39,7 @@
                         <h3 class="name">User Accounts </h3>
                         <p class="description">Manage user authentication for web-app</p>
                         <a href="<?= $this->url->build(['controller'=>'Users', 'action'=>'index'])?>" class="badge badge-outline-primary">Manage Users</a>    
-                        <a href="<?= $this->url->build(['controller'=>'Users', 'action'=>'view'])?>" class="badge badge-outline-primary">My Account</a>    
+                        <a href="<?= $this->url->build(['controller'=>'Users', 'action'=>'view', $user['id']])?>" class="badge badge-outline-primary">My Account</a>    
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
