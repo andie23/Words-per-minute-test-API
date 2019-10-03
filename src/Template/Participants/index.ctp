@@ -26,6 +26,7 @@
                 <td><?= h($participant->fullname) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('Details'), ['action' => 'view', $participant->id], ['class'=>'badge badge-light']) ?>
+                    <?= $this->Element('Button/is_active', ['entity'=> $participant])?>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -108,4 +108,29 @@ class ParticipantsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+    public function activate($id)
+    {
+       if ($this->Participants->setAccess($id, 1)){
+           $this->Flash->success('Participant has been successfully activated!');
+           $this->auditUser(__('Activated participant {0}', $id));
+        }else{
+            $this->auditUser(__('Failed to activated participant {0}', $id));
+            $this->Flash->error('An error has occured while blocking user');
+        }
+        return $this->redirect(['action' => 'index']);
+    }
+    
+    public function deactivate($id)
+    {
+       if ($this->Participants->setAccess($id, 0)){
+            $this->auditUser(__('Deactivated participant {0}', $id));
+            $this->Flash->success('User has been successfully deactivated!');
+        }else{
+            $this->auditUser(__('Failed to Deactivate participant {0}', $id));
+            $this->Flash->error('An error has occured while blocking user');
+        }
+        return $this->redirect(['action' => 'index']);
+    }
+
 }

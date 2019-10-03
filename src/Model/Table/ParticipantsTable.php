@@ -65,10 +65,11 @@ class ParticipantsTable extends Table
     }   
 
     public function verify($code){
-        $query = $this->find()
-                      ->where(['code' => $code]);
-    
-        return $query->count() >=1 ? True : False;
+        $query = $this->find()->where(['code' => $code]);
+        if ($query->count() >=1 and $query->first()->is_active == 1){
+            return True;
+        }
+        return False;
     }
     public function getIDFromRefCode($refCode)
     {
@@ -76,5 +77,14 @@ class ParticipantsTable extends Table
                       ->where(['code' => $refCode])
                       ->first();
         return $query->id;
+    }
+
+    public function setAccess($id, $bool)
+    {
+       return $this->save(
+            $this->patchEntity(
+                $this->get($id), ['is_active' => $bool]
+            )
+        );
     }
 }

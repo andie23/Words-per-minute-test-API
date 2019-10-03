@@ -33,6 +33,7 @@
                 <td><?= h($user->phone) ?></td>
                 <td><?= h($user->last_login) ?></td>
                 <td class="actions">
+                    <?= $this->Element('Button/is_active', ['entity'=> $user])?>
                     <?= $this->Html->link(__('Details'), ['action' => 'view', $user->id]) ?>
                     <?= $this->Html->link(__('Modify'), ['action' => 'edit', $user->id]) ?>
                     <?= $this->Form->postLink(__('Remove'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>

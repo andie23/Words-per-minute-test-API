@@ -15,7 +15,7 @@ class UsersController extends AppController
     {
         if($this->request->is('post')){
             $user = $this->Auth->identify();
-            if($user){
+            if($user and $user['is_active'] == 1){
                 $this->Users->logTime($user['id']);
                 $this->Auth->setUser($user);
                 $this->Flash->success(__('Welcome {0}', $user['fullname']));
@@ -130,4 +130,29 @@ class UsersController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+    public function activate($id)
+    {
+       if ($this->Users->setAccess($id, 1)){
+           $this->Flash->success('User has been successfully activated!');
+           $this->auditUser(__('Activated user {0}', $id));
+        }else{
+            $this->auditUser(__('Failed to activated user {0}', $id));
+            $this->Flash->error('An error has occured while blocking user');
+        }
+        return $this->redirect(['action' => 'index']);
+    }
+    
+    public function deactivate($id)
+    {
+       if ($this->Users->setAccess($id, 0)){
+            $this->auditUser(__('Deactivated user {0}', $id));
+            $this->Flash->success('User has been successfully deactivated!');
+        }else{
+            $this->auditUser(__('Failed to Deactivate user {0}', $id));
+            $this->Flash->error('An error has occured while blocking user');
+        }
+        return $this->redirect(['action' => 'index']);
+    }
+
 }
