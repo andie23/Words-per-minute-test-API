@@ -13,11 +13,8 @@
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('username') ?></th>
                 <th><?= $this->Paginator->sort('fullname') ?></th>
-                <th><?= $this->Paginator->sort('created_by') ?></th>
                 <th><?= $this->Paginator->sort('email') ?></th>
-                <th><?= $this->Paginator->sort('phone') ?></th>
                 <th><?= $this->Paginator->sort('last_login') ?></th>
                 <th class="actions"><?= __('Options') ?></th>
             </tr>
@@ -26,17 +23,12 @@
             <?php foreach ($users as $user): ?>
             <tr>
                 <td><?= $this->Number->format($user->id) ?></td>
-                <td><?= h($user->username) ?></td>
                 <td><?= h($user->fullname) ?></td>
-                <td><?= $this->Number->format($user->created_by) ?></td>
                 <td><?= h($user->email) ?></td>
-                <td><?= h($user->phone) ?></td>
                 <td><?= h($user->last_login) ?></td>
                 <td class="actions">
                     <?= $this->Element('Button/is_active', ['entity'=> $user])?>
-                    <?= $this->Html->link(__('Details'), ['action' => 'view', $user->id]) ?>
-                    <?= $this->Html->link(__('Modify'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Remove'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                    <?= $this->Html->link(__('Details'), ['action' => 'view', $user->id], ['class'=>'badge badge-light']) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

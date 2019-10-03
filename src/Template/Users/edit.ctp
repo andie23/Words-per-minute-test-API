@@ -34,7 +34,7 @@
             echo "</div>";
         ?>
     <p/>
-    <?= $this->Form->button(__('Submit'),['class' => 'btn btn-outline-danger']) ?>
+    <?= $this->Form->button(__('Submit'),['class' => 'btn btn-outline-primary']) ?>
     <?= $this->Form->end() ?> 
     </div>
 </div>

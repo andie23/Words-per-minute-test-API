@@ -2,10 +2,6 @@
 <div class="col-md-2">
 <div class="list-group">
         <?= $this->Html->link(__('List Participants'), ['action' => 'index'], ['class' => 'list-group-item list-group-item-action']) ?></li>
-        <?= $this->Html->link(__('List Perfomances'), ['controller' => 'Perfomances', 'action' => 'index'], ['class' => 'list-group-item list-group-item-action']) ?>
-
-        <?= $this->Html->link(__('New Perfomance'), ['controller' => 'Perfomances', 'action' => 'add'], ['class' => 'list-group-item list-group-item-action']) ?>
-
 </div>
 </div>
 <div class="col-md-10">   
@@ -15,14 +11,14 @@
     <div class="card-body">
         <?php
             echo "<div class='form-group'>";
-            echo $this->Form->input('code', ['class'=> 'form-control', 'placeholder' => 'code',]);
+            echo $this->Form->input('code', ['class'=> 'form-control', 'placeholder' => 'Reference Code',]);
             echo "</div>";
             echo "<div class='form-group'>";
-            echo $this->Form->input('fullname', ['class'=> 'form-control', 'placeholder' => 'fullname',]);
+            echo $this->Form->input('fullname', ['class'=> 'form-control', 'placeholder' => 'Fullname',]);
             echo "</div>";
         ?>
     <p/>
-    <?= $this->Form->button(__('Submit'),['class' => 'btn btn-outline-danger']) ?>
+    <?= $this->Form->button(__('Submit'),['class' => 'btn btn-outline-primary']) ?>
     <?= $this->Form->end() ?> 
     </div>
 </div>
