@@ -32,7 +32,7 @@ class ParticipantsController extends AppController
     public function view($id = null)
     {
         $participant = $this->Participants->get($id, [
-            'contain' => ['Perfomances']
+            'contain' => ['Perfomances', 'Perfomances.Challenges']
         ]);
         $this->set('participant', $participant);
         $this->set('_serialize', ['participant']);
