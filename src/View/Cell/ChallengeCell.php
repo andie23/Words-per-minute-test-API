@@ -4,9 +4,9 @@ namespace App\View\Cell;
 use Cake\View\Cell;
 
 /**
- * RegionCell cell
+ * Challenge cell
  */
-class RegionCell extends Cell
+class ChallengeCell extends Cell
 {
 
     /**
@@ -22,9 +22,12 @@ class RegionCell extends Cell
      *
      * @return void
      */
-    public function name($id)
+    public function display()
     {
-        $this->loadModel('Regions');
-        $this->set('name', $this->Regions->get($id)->name);
+    }
+    
+    public function name($id){
+        $this->loadModel('Challenges');
+        $this->set('name', $this->Challenges->get($id)->title);
     }
 }

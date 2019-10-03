@@ -4,9 +4,9 @@ namespace App\View\Cell;
 use Cake\View\Cell;
 
 /**
- * Group cell
+ * Participant cell
  */
-class GroupCell extends Cell
+class ParticipantCell extends Cell
 {
 
     /**
@@ -22,9 +22,12 @@ class GroupCell extends Cell
      *
      * @return void
      */
-    public function name($id)
+    public function display()
     {
-        $this->loadModel("Groups");
-        $this->set('name', $this->Groups->get($id)->name);
+    }
+
+    public function name($id){
+        $this->loadModel('Participants');
+        $this->set('name', $this->Participants->get($id)->fullname);
     }
 }

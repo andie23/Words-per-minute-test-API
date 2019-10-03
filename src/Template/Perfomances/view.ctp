@@ -1,10 +1,6 @@
 <div class="row">
 <div class="col-md-2">
 <div class="list-group">
-    <?= $this->Html->link(__('Edit Perfomance'), ['action' => 'edit', $perfomance->id], ['class' => 'list-group-item list-group-item-action']) ?>
-    <?= $this->Form->postLink(__('Delete Perfomance'), ['action' => 'delete', $perfomance->id], ['class' => 'list-group-item list-group-item-action', 'confirm' => __('Are you sure you want to delete # {0}?', $perfomance->id)]) ?>
-    <?= $this->Html->link(__('List Perfomances'), ['action' => 'index'], ['class' => 'list-group-item list-group-item-action']) ?>
-    <?= $this->Html->link(__('New Perfomance'), ['action' => 'add'], ['class' => 'list-group-item list-group-item-action']) ?>
         <?= $this->Html->link(__('List Challenges'), ['controller' => 'Challenges', 'action' => 'index'],['class' => 'list-group-item list-group-item-action']) ?>
         <?= $this->Html->link(__('New Challenge'), ['controller' => 'Challenges', 'action' => 'add'], ['class' => 'list-group-item list-group-item-action']) ?>
         <?= $this->Html->link(__('List Participants'), ['controller' => 'Participants', 'action' => 'index'],['class' => 'list-group-item list-group-item-action']) ?>
@@ -20,19 +16,15 @@
     <h5 class="card-title">Details</h5>
     <p class="card-text">
     <table class="table">
-                                        <tr>
+                <tr>
                     <th><?= __('Challenge') ?></th>
-                    <td><?= $perfomance->has('challenge') ? $this->Html->link($perfomance->challenge->id, ['controller' => 'Challenges', 'action' => 'view', $perfomance->challenge->id]) : '' ?></td>
+                    <td><?= $perfomance->has('challenge') ? $this->Html->link($perfomance->challenge->title, ['controller' => 'Challenges', 'action' => 'view', $perfomance->challenge->id]) : '' ?></td>
                 </tr>
-                                        <tr>
+                <tr>
                     <th><?= __('Participant') ?></th>
-                    <td><?= $perfomance->has('participant') ? $this->Html->link($perfomance->participant->id, ['controller' => 'Participants', 'action' => 'view', $perfomance->participant->id]) : '' ?></td>
+                    <td><?= $perfomance->has('participant') ? $this->Html->link($perfomance->participant->fullname, ['controller' => 'Participants', 'action' => 'view', $perfomance->participant->id]) : '' ?></td>
                 </tr>
-                                                        <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($perfomance->id) ?></td>
-                </tr>
-                        <tr>
+                <tr>
                     <th><?= __('Net Wpm') ?></th>
                     <td><?= $this->Number->format($perfomance->net_wpm) ?></td>
                 </tr>
@@ -42,7 +34,7 @@
                 </tr>
                         <tr>
                     <th><?= __('Accuracy') ?></th>
-                    <td><?= $this->Number->format($perfomance->accuracy) ?></td>
+                    <td><?= $this->Number->format($perfomance->accuracy) . '%' ?></td>
                 </tr>
                         <tr>
                     <th><?= __('Correct Words') ?></th>
@@ -75,14 +67,21 @@
     
     <div class="card" style="width: 58rem;">
     <div class="card-body">
-        <h5 class="card-title"><?= __('Typed List') ?></h5>
-        <p class="card-text"><?= $this->Text->autoParagraph(h($perfomance->typed_list)); ?></p>
-    </div>
-    </div>
-    <div class="card" style="width: 58rem;">
-    <div class="card-body">
         <h5 class="card-title"><?= __('Mistake List') ?></h5>
-        <p class="card-text"><?= $this->Text->autoParagraph(h($perfomance->mistake_list)); ?></p>
+        <p class="card-text">
+        <table class="table">
+        <tr> 
+            <th> Typed Word </th>
+            <th> Correct Word </th>
+        </tr>
+        <?php foreach(json_decode($perfomance->mistake_list) as $mistake): ?>
+            <tr>
+                <td> <span class="badge badge-danger"> <?= $mistake->typed ?> </span></td>
+                <td> <span class="badge badge-success"><?= $mistake->reference ?></span></td>
+            </tr>
+        <?php endforeach;?>
+        </p>
+        </table>
     </div>
     </div>
 </div>

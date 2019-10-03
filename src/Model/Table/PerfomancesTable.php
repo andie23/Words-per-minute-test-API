@@ -170,6 +170,7 @@ class PerfomancesTable extends Table
     public function getAvgChallengePerfomancesById($id){
         return $this->find()
                     ->select([
+                       'id' => 'Perfomances.id',
                        'score' => 'avg(score)',
                        'participant' => 'Participants.fullname',
                        'wpm' => 'avg(net_wpm)',

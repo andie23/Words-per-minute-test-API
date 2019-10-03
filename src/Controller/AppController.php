@@ -17,6 +17,7 @@ namespace App\Controller;
 use App\Lib\AuthorisationCheck;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Log;
 
 /**
  * Application Controller

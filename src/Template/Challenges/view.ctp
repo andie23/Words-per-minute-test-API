@@ -31,6 +31,7 @@
                 <th><?= __('Errors') ?></th>
                 <th><?= __('Minutes') ?></th>
                 <th><?= __('Timeout') ?></th>
+                <th> Actions </th>
             </tr>
             <?php foreach ($perfomances as $perfomance): ?>
             <tr>
@@ -41,6 +42,9 @@
                 <td><?= h((int) $perfomance->errors) ?></td>
                 <td><?= h($perfomance->minutes) ?></td>
                 <td><?= $perfomance->timeout == 1 ? '<b class="badge badge-danger"> Yes </b>' : '<b class="badge badge-success">No</b>' ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller'=>'Perfomances', 'action' => 'view', $perfomance->id], ['class'=> 'badge badge-light'])?>
+                </td>
             </tr>
             <?php endforeach; ?>
         </table>

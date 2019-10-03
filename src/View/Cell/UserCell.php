@@ -4,9 +4,9 @@ namespace App\View\Cell;
 use Cake\View\Cell;
 
 /**
- * Location cell
+ * User cell
  */
-class LocationCell extends Cell
+class UserCell extends Cell
 {
 
     /**
@@ -22,9 +22,11 @@ class LocationCell extends Cell
      *
      * @return void
      */
-    public function name($id)
+    public function display()
     {
-        $this->loadModel('Locations');
-        $this->set('name', $this->Locations->get($id)->name);
+    }
+    public function name($id){
+        $this->loadModel('Users');
+        $this->set('name', $this->Users->get($id)->fullname);
     }
 }
