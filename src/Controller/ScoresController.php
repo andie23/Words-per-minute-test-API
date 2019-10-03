@@ -18,7 +18,7 @@ class ScoresController extends AppController
      */
     public function index()
     {
-        $this->set('scores', $this->paginate($this->Scores));
+        $this->set('scores', $this->Scores->find()->order(['points'=>'desc']));
         $this->set('_serialize', ['scores']);
     }
 }
