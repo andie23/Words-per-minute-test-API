@@ -18,7 +18,7 @@ class ChallengesController extends AppController
      */
     public function index()
     {
-        $this->set('challenges', $this->paginate($this->Challenges));
+        $this->set('challenges', $this->paginate($this->Challenges->find()->order(['is_active' => 'desc'])));
         $this->set('_serialize', ['challenges']);
     }
 
