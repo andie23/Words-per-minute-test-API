@@ -3,9 +3,7 @@
 <div class="col-md-2">
 <div class="list-group">
   <?= $this->Html->link(__('New Participant'), ['action' => 'add'], ['class' => 'list-group-item list-group-item-action']) ?>
-                <?= $this->Html->link(__('List Perfomances'), ['controller' => 'Perfomances', 'action' => 'index'], ['class' => 'list-group-item list-group-item-action']) ?>
-            <?= $this->Html->link(__('New Perfomance'), ['controller' => 'Perfomances', 'action' => 'add'] , ['class' => 'list-group-item list-group-item-action']) ?>
-    </div>
+</div>
 </div>
 <div class="col-md-10">
     <div class="card" width=100?>
@@ -27,9 +25,7 @@
                 <td><?= h($participant->code) ?></td>
                 <td><?= h($participant->fullname) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('Details'), ['action' => 'view', $participant->id]) ?>
-                    <?= $this->Html->link(__('Modify'), ['action' => 'edit', $participant->id]) ?>
-                    <?= $this->Form->postLink(__('Remove'), ['action' => 'delete', $participant->id], ['confirm' => __('Are you sure you want to delete # {0}?', $participant->id)]) ?>
+                    <?= $this->Html->link(__('Details'), ['action' => 'view', $participant->id], ['class'=>'badge badge-light']) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -42,8 +42,6 @@
                     <td class="actions">
                         <?= $this->Html->link(__('Activate'), ['action' => 'activate', $challenge->id], ['class'=> 'badge badge-light'])?>
                         <?= $this->Html->link(__('Details'), ['action' => 'view', $challenge->id], ['class'=> 'badge badge-light']) ?>
-                        <?= $this->Html->link(__('Modify'), ['action' => 'edit', $challenge->id],  ['class'=> 'badge badge-light']) ?>
-                        <?= $this->Form->postLink(__('Remove'), ['action' => 'delete', $challenge->id], ['class'=> 'badge badge-light', 'confirm' => __('Are you sure you want to delete # {0}?', $challenge->id)]) ?>
                     </td>
                     </tr>
                 <?php endif; ?>
