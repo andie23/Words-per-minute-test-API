@@ -49,9 +49,11 @@ class ParticipantsController extends AppController
         if ($this->request->is('post')) {
             $participant = $this->Participants->patchEntity($participant, $this->request->data);
             if ($this->Participants->save($participant)) {
+                $this->auditUser(__('Created participant {0}', json_encode($this->request->data)));
                 $this->Flash->success(__('The participant has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
+                $this->auditUser(__('Failed to create participant {0}', json_encode($this->request->data)));
                 $this->Flash->error(__('The participant could not be saved. Please, try again.'));
             }
         }
@@ -74,9 +76,11 @@ class ParticipantsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $participant = $this->Participants->patchEntity($participant, $this->request->data);
             if ($this->Participants->save($participant)) {
+                $this->auditUser(__('Edited participant {0}', json_encode($this->request->data)));
                 $this->Flash->success(__('The participant has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
+                $this->auditUser(__('Failed to edited participant {0}', json_encode($this->request->data)));
                 $this->Flash->error(__('The participant could not be saved. Please, try again.'));
             }
         }
@@ -96,8 +100,10 @@ class ParticipantsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $participant = $this->Participants->get($id);
         if ($this->Participants->delete($participant)) {
+            $this->auditUser(__('Deleted participant {0}/{1}', $participant->fullname, $participant->code));
             $this->Flash->success(__('The participant has been deleted.'));
         } else {
+            $this->auditUser(__('Failed to delete participant {0}/{1}', $participant->fullname, $participant->code));
             $this->Flash->error(__('The participant could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);

@@ -19,8 +19,10 @@ class UsersController extends AppController
                 $this->Users->logTime($user['id']);
                 $this->Auth->setUser($user);
                 $this->Flash->success(__('Welcome {0}', $user['fullname']));
+                $this->auditUser('Logged in');
                 return $this->redirect(['controller'=>'Dashboard', 'action' => 'index']);
             }else{
+                $this->auditUser(__('Failed to loggin: {0}', json_encode($this->request->data)));
                 $this->Flash->error(__('Your username or password is incorrect.') );
             }
         }
@@ -28,6 +30,7 @@ class UsersController extends AppController
 
     public function logout()
     {
+        $this->auditUser(__('Logging out'));
         $this->Flash->success('You are now logged out.');
         return $this->redirect($this->Auth->logout());
     }
@@ -69,9 +72,11 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
+                $this->auditUser(__('Created user: {0}', json_encode($this->request->data)));
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
+                $this->auditUser(__('Failed to created user: {0}', json_encode($this->request->data)));
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
@@ -94,9 +99,11 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
+                $this->auditUser(__('Edited user with data: {0}', json_encode($this->request->data)));
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
+                $this->auditUser(__('Failed to edit user with data: {0}', json_encode($this->request->data)));
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }

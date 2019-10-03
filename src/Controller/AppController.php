@@ -17,7 +17,7 @@ namespace App\Controller;
 use App\Lib\AuthorisationCheck;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
-use Cake\Log;
+use Cake\Log\Log;
 
 /**
  * Application Controller
@@ -68,6 +68,12 @@ class AppController extends Controller
                 'action' => 'index'
             ]
         ]); 
+    }
+
+    public function auditUser($log){
+        $fullname = $this->Auth->User()['fullname'];
+        $username = $this->Auth->User()['username'];
+        Log::write('debug', __('{0}/{1}: {2}', $fullname, $username, $log));
     }
 
     public function beforeFilter(Event $event)

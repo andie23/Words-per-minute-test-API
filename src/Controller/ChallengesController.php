@@ -51,12 +51,15 @@ class ChallengesController extends AppController
         if ($this->request->is('post')) {
             $challenge = $this->Challenges->patchEntity($challenge, $this->request->data);
             if ($this->Challenges->save($challenge)) {
+                $this->auditUser(__('Created a new challenge with data: {0}', json_encode($this->request->data)));
                 if($challenge->is_active == 1){
+                    $this->auditUser(__('Challenge Activated'));
                     $this->Challenges->setActive($challenge->id);
                 }
                 $this->Flash->success(__('The challenge has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
+                $this->auditUser(__('Failed to created a new challenge with data: {0}', json_encode($this->request->data)));
                 $this->Flash->error(__('The challenge could not be saved. Please, try again.'));
             }
         }
@@ -82,9 +85,11 @@ class ChallengesController extends AppController
                 if($challenge->is_active == 1){
                     $this->Challenges->setActive($challenge->id);
                 }
+                $this->auditUser(__('Edited challenge {0} with data {1}', $challenge->title, json_encode($this->request->data)));
                 $this->Flash->success(__('The challenge has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
+                $this->auditUser(__('Failed to edited challenge {0} with data {1}', $challenge->title, json_encode($this->request->data)));
                 $this->Flash->error(__('The challenge could not be saved. Please, try again.'));
             }
         }
@@ -104,8 +109,10 @@ class ChallengesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $challenge = $this->Challenges->get($id);
         if ($this->Challenges->delete($challenge)) {
+            $this->auditUser(__('Deleted challenge {0}', $id));
             $this->Flash->success(__('The challenge has been deleted.'));
         } else {
+            $this->auditUser(__('Failed to delete challenge {0}', $id));
             $this->Flash->error(__('The challenge could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
@@ -115,18 +122,11 @@ class ChallengesController extends AppController
         $entity = $this->Challenges->setActive($id);
         if ($entity){
             $this->Flash->success(__('{0} is now the active challenge', $entity->title));
+            $this->auditUser(__('Activated challenge "{0}"',  $entity->title));
         }else{
+           $this->auditUser(__('Failed to activated challenge "{0}"',  $entity->title));
            $this->Flash->error('Failed to make challenge active');
         }
         return $this->redirect(['action' => 'index']);
-    }
-
-    public function random(){
-        if ($this->Challenges->setRandomPassageAsActive()){
-            $this->Flash->success('Random challenge has been set');
-        }else{
-            $this->Flash->error('Failed to set random challenge');
-        }
-        return $this->redirect(['controller'=>'Dashboard', 'action' => 'index']);
     }
 }
